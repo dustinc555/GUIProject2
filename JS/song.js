@@ -21,11 +21,32 @@ class Note {
   set length(newL) {
    	this.internal_length = newL; 
   }
+
+  static MAX_SONG_LENGTH() {
+	return 5;
+  }
   
    
 }
 
 
-Note.pitchList = ["C", "D", "E", "F", "G", "A", "B", "C"];
+Note.pitchList = { 'A4' : 'res/notes/A4_440Hz_5s.wav',
+		 'B4' : 'res/notes/B4_493.88Hz_5s.wav',
+		 'C4' : 'res/notes/C4_261.63Hz_5s.wav', 
+		 'C5' : 'res/notes/C5_523.25Hz_5s.wav',
+		 'D4' : 'res/notes/D4_293.66Hz_5s.wav',
+		 'E4' : 'res/notes/E4_329.63Hz_5s.wav',
+		 'F4' : 'res/notes/F4_349.23Hz_5s.wav',
+ 		 'G4' : 'res/notes/G4_392Hz_5s.wav'};
+
+Note.
 
 
+function playNote(note) {
+	var l = note.length;
+	var p = note.pitch;
+	sound = new Audio(Note.pitchList[p]); // get the path to the note with the pitch
+	sound.autoplay = false;
+	sound.currentTime = Note.MAX_SONG_LENGTH - l;
+	sound.play();
+}

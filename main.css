@@ -17,6 +17,18 @@
 	min-height: 3em;
 }
 
+#note_bar {
+	
+	border-style: solid;
+	border-top-style: none;
+}
+
+#note_length {
+    white-space:nowrap;
+    overflow-x:scroll;
+    overflow: hidden;
+}
+
 /* SECTION: Class */
 .menu_item a {
   float: left;
@@ -34,11 +46,14 @@
 }
 
 .note_button {
-	display: inline;
-	display: block;
-  	color: white;
-  	text-align: center;
-  	padding: 14px 16px;
-  	text-decoration: none;
+    margin: 1em;
+    min-height:2em;
+    max-width:3em;
 }
+
+.note_length_child {
+    display:inline-block;
+    margin-left: 1em;
+}
+
 

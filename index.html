@@ -4,8 +4,6 @@
 		<title>Web Song</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="main.css" media="screen" />
-		<script src="JS/main.js">
-        	</script>
 	</head>
 	
 
@@ -17,20 +15,25 @@
 				<li class="menu_item"><a href="help.html">Help</a></li>
 			</ul>
 		</nav>
-		<div id="note_bar"/>
+		<div id="note_bar">
+		</div>
 
 		<div id ="note_length">
-			<p>Note length</p> 
-			<input type="text"> 
-			<button>set</button>
+			<p class="note_length_child">Note length (seconds):</p> 
+			<input class="note_length_child" type="text"/> 
+			<button class="note_length_child">set</button>
 		</div>	
 		<div id="createNote">
-			<button>Create Note</button>
-			<button>Undo</button>
-			<button>Redo</button>
+			<button id="confirm_button">Confirm Note</button>
+			<button id="undo_button">Undo</button>
+			<button id="redo_button">Redo</button>
 		</div>
 		<button>save</button>
 		<div id="song_area"></div>			
 	</body>
 </html>
 
+<script src="JS/song.js">
+</script>
+<script src="JS/main.js">
+</script>
