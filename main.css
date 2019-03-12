@@ -1,6 +1,4 @@
 
-
-
 /* SECTION: ID */ 
 #menu ul {
   list-style-type: none;
@@ -29,6 +27,11 @@
     overflow: hidden;
 }
 
+#createNote {
+    margin: 1em;
+    
+}
+
 /* SECTION: Class */
 .menu_item a {
   float: left;
@@ -55,5 +58,4 @@
     display:inline-block;
     margin-left: 1em;
 }
-
 

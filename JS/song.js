@@ -39,14 +39,12 @@ Note.pitchList = { 'A4' : 'res/notes/A4_440Hz_5s.wav',
 		 'F4' : 'res/notes/F4_349.23Hz_5s.wav',
  		 'G4' : 'res/notes/G4_392Hz_5s.wav'};
 
-Note.
-
 
 function playNote(note) {
 	var l = note.length;
 	var p = note.pitch;
 	sound = new Audio(Note.pitchList[p]); // get the path to the note with the pitch
 	sound.autoplay = false;
-	sound.currentTime = Note.MAX_SONG_LENGTH - l;
-	sound.play();
+	sound.currentTime = parseFloat(Note.MAX_SONG_LENGTH() - l);
+	sound.play(); 
 }
