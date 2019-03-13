@@ -52,21 +52,25 @@ class Command {
 
 
 class NoteCommand extends Command {
-    constructor(note) {
+    constructor(note, songList) {
         super();
         this.note = note;
+        this.songList = songList;
     }
     
     execute() {
         // push our note to the song list
-        
+        this.songList.push(this.note);
     }
     
     undo() {
         // pop our note from the song list
+        this.songList.pop();
     }
     
     redo() {
         // push our note to the song list
+        // in our case its the same as execute
+        this.execute();
     }
 }

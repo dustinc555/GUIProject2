@@ -12,13 +12,15 @@ index_elements = {
     "song_area" : document.getElementById("song_area")
 }*/
 
-
-var note_bar = document.getElementById("note_bar");;
+var note_bar = document.getElementById("note_bar");
 var confirm_button = document.getElementById("confirm_button");
 var lengthSlider = document.getElementById("note_length_slider");
 var lengthLabel = document.getElementById("length_label");
 var note_production_label = document.getElementById("note_production_label");
 var song_area = document.getElementById("song_area");
+var undo_button  = document.getElementById("undo_button");
+var redo_button = document.getElementById("redo_button");
+
 
 // array that contains the current song
 var songList = [];
@@ -59,6 +61,14 @@ confirm_button.onclick = function() {
 }
 
 
+undo_button.onclick = function() {
+    undo_button_callback();
+}
+
+redo_button.onclick = function() {
+    redo_button_callback();
+}
+
 
 
 // index.html utility functions
@@ -66,15 +76,8 @@ confirm_button.onclick = function() {
 function populateSongArea() {
     song_area.innerHTML = "";
     songList.forEach(note => {
-        song_area.innerHTML += note.pitch + " " + note.length;
+        song_area.innerHTML += note.pitch + " " + note.length + " ";
   });
-}
-
-/*** populates the song_area elem ****/
-// sends off to CommandStack
-function confirm_button_callback(note) {
-    commandStack.execute(new NoteCommand(note));
-    populateSongArea();
 }
 
 
@@ -101,7 +104,8 @@ function setProductionNoteLength(length) {
 
 
 function setSongList(newList) {
-    
+    songList = newList;
+    populateSongArea();
 }
 
 // callbacks
@@ -115,4 +119,23 @@ function note_button_callback(pitch) {
 /**** length set button callback  ***************************************************/
 function length_slider_callback(value) {
     setProductionNoteLength(value);
+}
+
+/*** populates the song_area elem ****/
+// sends off to CommandStack
+function confirm_button_callback(note) {
+    commandStack.execute(new NoteCommand(new Note(note.pitch, note.length), songList));
+    populateSongArea();
+}
+
+/*** undo ****/
+function undo_button_callback() {
+    commandStack.undo();
+    populateSongArea();
+}
+
+/*** redo ****/
+function redo_button_callback() {
+    commandStack.redo();
+    populateSongArea();
 }
