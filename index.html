@@ -19,20 +19,23 @@
 		</div>
 
 		<div id ="note_length">
-			<p class="note_length_child">Note length (seconds):</p> 
-			<input class="note_length_child" type="text"/> 
-			<button class="note_length_child">set</button>
+			<p id="length_label">Note length (seconds):</p> 
+            <button class="note_length_child" onclick="setLength">set</button>
+            <input id="note_length_slider" class="slider" type="range" min=".1" max="5" step="0.1" value=".2">
 		</div>	
 		<div id="createNote">
-			<button id="confirm_button">Confirm Note</button>
+			<button id="confirm_button">Confirm Note<div id="note_production_label"></div></button>
 			<button id="undo_button">Undo</button>
 			<button id="redo_button">Redo</button>
+		
 		</div>
 		<button>save</button>
 		<div id="song_area"></div>			
 	</body>
 </html>
 
+<script src="JS/command.js">
+</script>
 <script src="JS/song.js">
 </script>
 <script src="JS/main.js">
