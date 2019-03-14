@@ -74,3 +74,43 @@ class NoteCommand extends Command {
         this.execute();
     }
 }
+
+class SetLengthCommand extends Command {
+    constructor(length, note, songList) {
+        super();
+        this.length = length;
+        this.prevLength = note.length;
+        this.songList = songList;
+    }
+    
+    execute() {
+        songList[songList.length - 1].length = this.length;
+    }
+    
+    undo() {
+        songList[songList.length - 1].length = this.prevLength;
+    }
+    
+    redo() {
+        this.execute();
+    }
+}
+
+class ClearCommand extends Command {
+    constructor(songList) {
+        super();
+        this.prevSongList = songList;
+    }
+    
+    execute() {
+        songList = [];
+    }
+    
+    undo() {
+        songList = this.prevSongList;
+    }
+    
+    redo() {
+        this.execute();
+    }
+}

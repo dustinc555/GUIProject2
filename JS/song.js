@@ -41,5 +41,5 @@ function playNote(note) {
     sound = new Audio(Note.pitchList[p]); // get the path to the note with the pitch
     sound.autoplay = false;
     sound.currentTime = parseFloat(Note.MAX_SONG_LENGTH - l);
-    sound.play(); 
+    sound.play();
 }

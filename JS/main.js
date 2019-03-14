@@ -20,6 +20,10 @@ var note_production_label = document.getElementById("note_production_label");
 var song_area = document.getElementById("song_area");
 var undo_button  = document.getElementById("undo_button");
 var redo_button = document.getElementById("redo_button");
+var play_song_button = document.getElementById("play_song_button");
+var play_note_button = document.getElementById("play_note_button");
+var set_length_button = document.getElementById("set_length_button");
+var clear_button = document.getElementById("clear_button");
 
 
 // array that contains the current song
@@ -69,11 +73,27 @@ redo_button.onclick = function() {
     redo_button_callback();
 }
 
+play_song_button.onclick = function() {
+    playSong(songList);
+}
+
+play_note_button.onclick = function() {
+    playNote(note_production_label.note);
+}
+
+set_length_button.onclick = function() {
+    set_length_button_callback();
+}
+
+clear_button.onclick = function() {
+    clear_button_callback();
+}
+
 
 
 // index.html utility functions
 /*** populates the song_area element with songList contents ****/
-function populateSongArea() {
+function drawSongArea() {
     song_area.innerHTML = "";
     songList.forEach(note => {
         song_area.innerHTML += note.pitch + " " + note.length + " ";
@@ -105,11 +125,20 @@ function setProductionNoteLength(length) {
 
 function setSongList(newList) {
     songList = newList;
-    populateSongArea();
+    drawSongArea();
+}
+
+function playSong(song) {
+    totalSeconds = 0.0;
+    songList.forEach(note => {
+        window.setTimeout( function() {
+            playNote(note);
+        }, totalSeconds * 1000 );
+        totalSeconds += parseFloat(note.length);
+    });
 }
 
 // callbacks
-
 /**** Note Button callback  ***************************************************/
 function note_button_callback(pitch) {
     note_production_label.note = note;
@@ -125,17 +154,29 @@ function length_slider_callback(value) {
 // sends off to CommandStack
 function confirm_button_callback(note) {
     commandStack.execute(new NoteCommand(new Note(note.pitch, note.length), songList));
-    populateSongArea();
+    drawSongArea();
 }
 
 /*** undo ****/
 function undo_button_callback() {
     commandStack.undo();
-    populateSongArea();
+    drawSongArea();
 }
 
 /*** redo ****/
 function redo_button_callback() {
     commandStack.redo();
-    populateSongArea();
+    drawSongArea();
+}
+
+function set_length_button_callback() {
+    length = lengthSlider.value;
+    note = songList[songList.length - 1];
+    commandStack.execute(new SetLengthCommand(length, note, songList))
+    drawSongArea();
+}
+
+function clear_button_callback() {
+    commandStack.execute(new ClearCommand(songList));
+    drawSongArea();
 }
