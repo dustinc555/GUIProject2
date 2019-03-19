@@ -3,7 +3,7 @@
     // get song name and notes from post request
     $songName = $_POST['name'];
     $songName = str_replace('"', "", $songName);
-    $songNotes = json_encode(json_decode($_POST['notes']), JSON_PRETTY_PRINT);
+    $songNotes = $_POST['notes'];
     
     // check if dir files exist
     if (!is_dir("files")) {
