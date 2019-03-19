@@ -1,3 +1,5 @@
+// REBENITSCH: COMMAND
+
 class CommandStack {
     
    constructor() {
@@ -9,6 +11,7 @@ class CommandStack {
       command.execute();
       this.commandStack.push(command);
       this.redoStack = [];
+      
    }
 
    undo() {
@@ -84,11 +87,11 @@ class SetLengthCommand extends Command {
     }
     
     execute() {
-        songList[songList.length - 1].length = this.length;
+        songList.getBack().length = this.length;
     }
     
     undo() {
-        songList[songList.length - 1].length = this.prevLength;
+        songList.getBack().length = this.prevLength;
     }
     
     redo() {
@@ -103,7 +106,7 @@ class ClearCommand extends Command {
     }
     
     execute() {
-        songList = [];
+        songList = new Song([], songList.name);
     }
     
     undo() {
