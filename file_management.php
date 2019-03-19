@@ -11,7 +11,7 @@
 		<nav id="menu">
 			<ul class="navList">
 				<li class="menu_item"><a href="index.php">Main Page</a></li>
-				<li class="menu_item"><a href="file_management.html">Files</a></li> 
+				<li class="menu_item"><a href="file_management.php">Files</a></li> 
 				<li class="menu_item"><a href="help.html">Help</a></li>
 			</ul>
 		</nav>
@@ -37,7 +37,6 @@
             }
             ?>
         </ul>
-        <p>You can only have three files stored on the server at a time.</p>
 	</body>
 </html>
 
