@@ -16,25 +16,34 @@
 			</ul>
 		</nav>
         
+        <h4 id="upload)file_header">Upload File</h4>
+        <form id="upload_file_form">
+            <input id="upload_file_button" type='file' accept=".json"/>
+            </br>
+            <input type="submit" onclick="upload_file_callback()"/>
+        </form>
+        
+        <h4>Files on server</h4>
+        
         <ul id="file_list">
             <?php
-            $files = glob("files/*json");
-
-            if (is_array($files)) {
-
-                 foreach($files as $filename) {
-                    $xml_file = file_get_contents($filename, FILE_TEXT);
-                    $fileSize = filesize($filename);
-                    $liNode = '<li class="file_list_child">';
-                    $liNode .= '<a href="' . $filename . '">' . basename($filename) . '</a>';
-                    $liNode .= '<a href="' . $filename . '" download> Download </a>';
-                    $liNode .= '<a onclick="load_button_callback(\'' . $filename . '\')" id="load_button"> Load to editor </a>';
-                    $liNode .= '<a onclick="delete_button_callback(\'' . $filename . '\')" id="delete_button""> Delete </a>';
-                    $liNode .= '<span>' . $fileSize . ' bytes </span>';
-                    $liNode .= '</li>';
-                    echo $liNode;
-                 }
-            }
+                $files = glob("files/*json");
+                // if there are json files in our files folder
+                if (is_array($files)) {
+                    // create a list element for each of them with js callbacks 
+                     foreach($files as $filename) {
+                        $xml_file = file_get_contents($filename, FILE_TEXT);
+                        $fileSize = filesize($filename);
+                        $liNode = '<li class="file_list_child">';
+                        $liNode .= '<a href="' . $filename . '">' . basename($filename) . '</a>';
+                        $liNode .= '<a href="' . $filename . '" download> Download </a>';
+                        $liNode .= '<a onclick="load_button_callback(\'' . $filename . '\')" id="load_button"> Load to editor </a>';
+                        $liNode .= '<a onclick="delete_button_callback(\'' . $filename . '\')" id="delete_button""> Delete </a>';
+                        $liNode .= '<span>' . $fileSize . ' bytes </span>';
+                        $liNode .= '</li>';
+                        echo $liNode;
+                     }
+                }
             ?>
         </ul>
 	</body>

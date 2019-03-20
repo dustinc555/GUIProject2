@@ -42,7 +42,48 @@ function delete_button_callback(filePath) {
     }
 } 
 
+function upload_file_callback() {
+    // check upload_file_button data
+    // make ajax request to save_song.php
+    var file_upload_button = document.getElementById("upload_file_button");
+    var file = document.getElementById("upload_file_button").files[0];
+    
+    if (file) {
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            var name = getFileNameFromPath(file_upload_button.value);
+            var notes = evt.target.result;
+            
+            alert(name);
+            alert(notes);
+            
+            /*
+            $.ajax({    //create an ajax request to load_page.php
+                type: "POST",
+                dataType: "html",
+                url: "save_song.php",
+                async: false,
+                data: {
+                    'name' : name,
+                    'notes' : notes,
+                },
+                success: function(msg) {
+                    if(msg == "SUCCESS") {
+                        alert("save successful!");
+                    }
+                    else {
+                        alert("Error: " + msg);
+                    }
+                }
+            });*/
+        }
+            reader.onerror = function (evt) {
+            alert("error reading file");
+        }
+    }
+}
 
 function getFileNameFromPath(filePath) {
-    return filePath.split("/").pop().split(".")[0];
+    return filePath.split("\\").pop().split(".")[0];
 }    

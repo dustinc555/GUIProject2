@@ -40,6 +40,7 @@
 </html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="JS/storage.js"></script><script src="JS/song.js"></script>
+<script src="JS/storage.js"></script>
+<script src="JS/song.js"></script>
 <script src="JS/command.js"></script>
 <script src="JS/index.js"></script>

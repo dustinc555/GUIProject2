@@ -31,7 +31,11 @@ class CommandStack {
    }
 }
  
-// abstract class
+/** abstract class
+* in order to make a new command, extend this class and implement the methods
+* execute, undo, and redo
+*/
+
 class Command {
     
     constructor() {
