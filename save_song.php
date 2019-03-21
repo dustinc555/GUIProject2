@@ -7,7 +7,7 @@
     
     // check if dir files exist
     if (!is_dir("files")) {
-        mkdir("/path/to/my/dir", 755);
+        mkdir("/path/to/my/dir", 766);
     }
     // check if number of files is less than 3
     $files = glob("files/*json");
@@ -18,7 +18,7 @@
         echo "Max number of songs reached. Please delete a song to save to server. You can download the song before hand.";
     } else {
         // save notes to name.json
-        $fileName = "files/" . $songName . ".json";
+        $fileName = "files/" . $songName . ".j";
         $myfile = fopen($fileName, "w");
         
         fwrite($myfile, $songNotes);
