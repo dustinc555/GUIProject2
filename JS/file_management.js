@@ -58,7 +58,7 @@ function upload_file_callback() {
             alert(name);
             alert(notes);
             
-            /*
+            
             $.ajax({    //create an ajax request to load_page.php
                 type: "POST",
                 dataType: "html",
@@ -71,12 +71,13 @@ function upload_file_callback() {
                 success: function(msg) {
                     if(msg == "SUCCESS") {
                         alert("save successful!");
+                        location.reload();
                     }
                     else {
                         alert("Error: " + msg);
                     }
                 }
-            });*/
+            });
         }
             reader.onerror = function (evt) {
             alert("error reading file");
