@@ -18,7 +18,7 @@
         echo "Max number of songs reached. Please delete a song to save to server. You can download the song before hand.";
     } else {
         // save notes to name.json
-        $fileName = "files/" . $songName . ".j";
+        $fileName = "files/" . $songName . ".json";
         $myfile = fopen($fileName, "w");
         
         fwrite($myfile, $songNotes);
