@@ -1,5 +1,9 @@
 <?php
 
+
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
     // get song name and notes from post request
     $songName = $_POST['name'];
     $songName = str_replace('"', "", $songName);
@@ -7,7 +11,7 @@
     
     // check if dir files exist
     if (!is_dir("files")) {
-        mkdir("/path/to/my/dir", 766);
+        mkdir("files", 0755);
     }
     // check if number of files is less than 3
     $files = glob("files/*json");
