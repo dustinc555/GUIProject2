@@ -60,15 +60,14 @@ function upload_file_callback() {
     // check upload_file_button data
     // make ajax request to save_song.php
     var file_upload_button = document.getElementById("upload_file_button");
-    var file = document.getElementById("upload_file_button").files[0];
-    
+    var file = document.getElementById("upload_file_button").files[0];  
+ 
     if (file) {
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
         reader.onload = function (evt) {
             var name = getFileNameFromPath(file_upload_button.value);
             var notes = evt.target.result;
-               
             $.ajax({    //create an ajax request to load_page.php
                 type: "POST",
                 dataType: "html",
@@ -100,5 +99,6 @@ function upload_file_callback() {
  * @param filePath path to file
 */
 function getFileNameFromPath(filePath) {
-    return filePath.split("/").pop().split(".")[0];
+    filePath = filePath.substring(filePath.lastIndexOf('/')+1);
+    return (filePath.substring(filePath.lastIndexOf('\\')+1)).split(".")[0];
 }    
