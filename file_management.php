@@ -16,17 +16,21 @@
 			</ul>
 		</nav>
         
+        <p id="error_box""/>
+        
         <h4 id="upload)file_header">Upload File</h4>
         <form id="upload_file_form">
-            <input id="upload_file_button" type='file' accept=".json"/>
+            <input id="upload_file_button" class="form_item" type='file' accept=".json"/>
             </br>
-            <input type="submit" onclick="upload_file_callback()"/>
+            <input class="form_item" type="submit" onclick="upload_file_callback()"/>
         </form>
         
         <h4>Files on server</h4>
         
         <ul id="file_list">
             <?php
+                /** Generates li elements with buttons to manipulate songs stored on the server.
+                */
                 $files = glob("files/*json");
                 // if there are json files in our files folder
                 if (is_array($files)) {
@@ -38,7 +42,7 @@
                         $liNode .= '<a href="' . $filename . '">' . basename($filename) . '</a>';
                         $liNode .= '<a href="' . $filename . '" download> Download </a>';
                         $liNode .= '<a onclick="load_button_callback(\'' . $filename . '\')" id="load_button"> Load to editor </a>';
-                        $liNode .= '<a onclick="delete_button_callback(\'' . $filename . '\')" id="delete_button""> Delete </a>';
+                        $liNode .= '<a onclick="delete_button_callback(\'' . basename($filename) . '\')" id="delete_button""> Delete </a>';
                         $liNode .= '<span>' . $fileSize . ' bytes </span>';
                         $liNode .= '</li>';
                         echo $liNode;

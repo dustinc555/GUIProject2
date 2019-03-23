@@ -29,6 +29,10 @@
 	margin: 1em 0;
 }
 
+#upload_file_form {
+    margin: 1em;
+}
+
 #error_box {
 
 }
@@ -49,6 +53,11 @@
 /* Change the link color to #111 (black) on hover */
 .menu_item a:hover {
   background-color: #111;
+}
+
+.form_item {
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 
 .note_button {

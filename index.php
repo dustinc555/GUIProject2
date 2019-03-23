@@ -19,7 +19,7 @@
 
 		<div id ="note_length">
 			<p id="length_label">Note length (seconds):</p> 
-            <button id="set_length_button" class="note_length_child">set</button>
+            <button id="set_note_button" class="note_length_child">set</button>
             <input id="note_length_slider" class="slider" type="range" min=".1" max="5" step="0.1" value=".2">
 		</div>	
 		<div id="create_note">

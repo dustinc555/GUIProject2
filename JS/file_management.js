@@ -1,6 +1,13 @@
+/** 
+ *  This file contains a set of callbacks for the buttons generated in file_management.php.
+ *  @requires JQuery
+ */
 
 
-
+/**
+ * Replaces the users local stored song with a song saved on the server.
+ * @param filePath The path set to the callback by php in file_management.php
+*/
 function load_button_callback(filePath) {
     
     if (confirm("Are you sure? This will delete your current song if not saved!")) {
@@ -15,6 +22,10 @@ function load_button_callback(filePath) {
     } 
 }
 
+/**
+ * Sends request to server to permanently delete the song.
+ * @param filePath The path set to the callback by php in file_management.php
+*/
 function delete_button_callback(filePath) {
     if (confirm("Are you sure you wish to delete this song: " + getFileNameFromPath(filePath))) {
       
@@ -42,6 +53,9 @@ function delete_button_callback(filePath) {
     }
 } 
 
+/**
+ * Creates open file dialog for user to upload file to server.
+*/
 function upload_file_callback() {
     // check upload_file_button data
     // make ajax request to save_song.php
@@ -54,11 +68,7 @@ function upload_file_callback() {
         reader.onload = function (evt) {
             var name = getFileNameFromPath(file_upload_button.value);
             var notes = evt.target.result;
-            
-            alert(name);
-            alert(notes);
-            
-            
+               
             $.ajax({    //create an ajax request to load_page.php
                 type: "POST",
                 dataType: "html",
@@ -74,7 +84,7 @@ function upload_file_callback() {
                         location.reload();
                     }
                     else {
-                        alert("Error: " + msg);
+                        $("#error_box")[0].innerHTML = "Error: " + msg;
                     }
                 }
             });
@@ -85,6 +95,10 @@ function upload_file_callback() {
     }
 }
 
+/**
+ * Returns basename of file from file path.
+ * @param filePath path to file
+*/
 function getFileNameFromPath(filePath) {
-    return filePath.split("\\").pop().split(".")[0];
+    return filePath.split("/").pop().split(".")[0];
 }    

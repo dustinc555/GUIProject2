@@ -1,18 +1,7 @@
-// Initialize
- 
-// get HTML elements
-// get HTML elements
-/*
-index_elements = {
-    "note_bar" : document.getElementById("note_bar"),
-    "confirm_button" : document.getElementById("confirm_button"),
-    "lengthSlider" : document.getElementById("note_length_slider"),
-    "lengthLabel" : document.getElementById("length_label"),
-    "note_production_label" : document.getElementById("note_production_label"),
-    "song_area" : document.getElementById("song_area")
-}*/
-
-
+/** 
+ * @purpose this file contains all of the callbacks necessary for the song editor in index.php.
+ * @requires song.js, storage.js, JQuery, 
+ */
 
 var note_bar = document.getElementById("note_bar");
 var confirm_button = document.getElementById("confirm_button");
@@ -24,18 +13,26 @@ var undo_button  = document.getElementById("undo_button");
 var redo_button = document.getElementById("redo_button");
 var play_song_button = document.getElementById("play_song_button");
 var play_note_button = document.getElementById("play_note_button");
-var set_length_button = document.getElementById("set_length_button");
+var set_note_button = document.getElementById("set_note_button");
 var clear_button = document.getElementById("clear_button");
 var save_button = document.getElementById("save_button");
 var song_title_box = document.getElementById("song_title_box");
 
-// intialize song to be empty
+/** 
+ *  intialize song to be empty if user does not have a song that
+ *  they are currently working on.
+ */
 var songList = checkUserStorage();
 
-// used by confirm note, undo, redo buttons.
+/**
+ *  used by confirm note, undo, redo buttons.
+ */
 var commandStack = new CommandStack();
 
-// populate notes
+/** 
+*  populate notes 
+*  see: Song.js -> Note
+*/
 for (var key in Note.pitchList) {
     if (Note.pitchList.hasOwnProperty(key)) {
         var newButton = document.createElement("BUTTON");
@@ -53,14 +50,15 @@ for (var key in Note.pitchList) {
     }
 }
 
+// initially draw the song area for the users view of the state.
 drawSongArea();
 
-// initialize main page slider
+/// initialize index.js page slider for note length
 lengthSlider.oninput = function() {
   length_slider_callback(this.value);
 }
 
-// initialize production note button 
+/// initialize production note button to be some note 
 setProductionNote(new Note('A4', 0.2));
 length_slider_callback(lengthSlider.value);
 
@@ -89,8 +87,8 @@ play_note_button.onclick = function() {
     playNote(note_production_label.note);
 }
 
-set_length_button.onclick = function() {
-    set_length_button_callback();
+set_note_button.onclick = function() {
+    set_note_button_callback();
 }
 
 clear_button.onclick = function() {
@@ -109,7 +107,9 @@ function drawSongArea() {
 }
 
 
-/**** Production Note Label interface *****************************************/
+/**** Production Note Label interface ****************************************
+ * The production note is the note shown in the confirm button button.
+ */
 function updateProductionNote() {
     note = note_production_label.note;
     note_production_label.innerHTML = note.pitch + ' ' + note.length;
@@ -130,13 +130,12 @@ function setProductionNoteLength(length) {
     updateProductionNote();
 }
 
-
 function setSongList(newList) {
     songList = newList;
     drawSongArea();
 }
 
-// callbacks
+/// ACTUAL CALLBACKS 
 /**** Note Button callback  ***************************************************/
 function note_button_callback(pitch) {
     songList.name = song_title_box.value;
@@ -150,7 +149,9 @@ function length_slider_callback(value) {
     setProductionNoteLength(value);
 }
 
-/*** populates the song_area elem ****/
+/*** populates the song_area elem ***
+*    REBENITSCH: ACTION  
+*/
 // sends off to CommandStack
 function confirm_button_callback(note) {
     songList.name = song_title_box.value;
@@ -159,7 +160,9 @@ function confirm_button_callback(note) {
     saveSong(songList);
 }
 
-/*** undo ****/
+/*** undo ***
+*    REBENITSCH: ACTION  
+*/
 function undo_button_callback() {
     songList.name = song_title_box.value;
     commandStack.undo();
@@ -167,7 +170,9 @@ function undo_button_callback() {
     saveSong(songList);
 }
 
-/*** redo ****/
+/*** redo ***
+*    REBENITSCH: ACTION  
+*/
 function redo_button_callback() {
     songList.name = song_title_box.value;
     commandStack.redo();
@@ -175,17 +180,26 @@ function redo_button_callback() {
     saveSong(songList);
 }
 
-function set_length_button_callback() {
+/** set note button callback 
+*   REBENITSCH: ACTION  
+*/
+
+function set_note_button_callback() {
     songList.name = song_title_box.value;
     if ( !(songList.notes.length == 0) ) {
-        length = lengthSlider.value;
-        note = songList.getBack();
-        commandStack.execute(new SetLengthCommand(length, note, songList))
+        var n = note_production_label.note;
+        
+        alert(songList.notes[songList.length - 1]);
+        commandStack.execute(new SetNoteCommand(new Note(n.pitch, n.length),
+                                                    songList));
         drawSongArea();
         saveSong(songList);
     }
 }
 
+/** clear song 
+*   REBENITSCH: ACTION  
+*/
 function clear_button_callback() {
     songList.name = song_title_box.value;
     commandStack.execute(new ClearCommand(songList));
@@ -193,6 +207,10 @@ function clear_button_callback() {
     saveSong(songList);
 }
 
+
+/** save song 
+*   REBENITSCH: ACTION  
+*/
 function save_button_callback() {
     songList.name = song_title_box.value;
     saveSong(songList);

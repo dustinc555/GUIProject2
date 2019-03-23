@@ -1,8 +1,8 @@
 <?php
-
-
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+    /**This file receives a post request with a songs name and
+    *   a songs json data and saves it to the server.
+    *   @return SUCCESS if successful; otherwise, an error message.
+    */
 
     // get song name and notes from post request
     $songName = $_POST['name'];
@@ -11,7 +11,7 @@
     
     // check if dir files exist
     if (!is_dir("files")) {
-        mkdir("files", 0755);
+        mkdir("files", 766);
     }
     // check if number of files is less than 3
     $files = glob("files/*json");
@@ -22,7 +22,7 @@
         echo "Max number of songs reached. Please delete a song to save to server. You can download the song before hand.";
     } else {
         // save notes to name.json
-        $fileName = "files/" . $songName . ".json";
+        $fileName = "files/" . basename($songName) . ".json";
         $myfile = fopen($fileName, "w");
         
         fwrite($myfile, $songNotes);

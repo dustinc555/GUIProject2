@@ -1,12 +1,24 @@
 // REBENITSCH: COMMAND
 
 class CommandStack {
+   /**
+    * This class is used to implement the UNDO/REDO pattern.
+    * @property commandStack List of commands the user has currently executed.
+    * @property redoStack List of commands the user has undone, is cleared when a new command is executed.    
+    */
     
+   /**
+    * starts with empty command stack and empty redo stack
+    * 
+    */
    constructor() {
       this.commandStack = [];
       this.redoStack = [];
    }
 
+   /**
+    * Calls commands execute, pushes it to commandStack and clears redoStack. 
+    */
    execute(command) {
       command.execute();
       this.commandStack.push(command);
@@ -14,6 +26,9 @@ class CommandStack {
       
    }
 
+    /**
+     * Calls last executed commands undo and pushes it to redoStack.
+     */
    undo() {
       if (this.commandStack.length == 0)
          return;
@@ -22,6 +37,9 @@ class CommandStack {
       this.redoStack.push(command);
    }
 
+    /**
+     * calls redo on last undone command pushed to redoStack.
+     */
    redo() {
       if (this.redoStack.length == 0)
          return;
@@ -31,13 +49,11 @@ class CommandStack {
    }
 }
  
-/** abstract class
-* in order to make a new command, extend this class and implement the methods
-* execute, undo, and redo
-*/
-
 class Command {
-    
+    /** abstract class
+     * in order to make a new command, extend this class and implement the methods
+     * execute, undo, and redo. If these methods are not implemented an error will be thrown.
+     */
     constructor() {
         if (this.constructor === Command) {
             throw new TypeError('Abstract class "Command" cannot be instantiated directly.'); 
@@ -59,6 +75,10 @@ class Command {
 
 
 class NoteCommand extends Command {
+    /**
+     * Command that adds note to a song.
+     * @extends Command
+     */
     constructor(note, songList) {
         super();
         this.note = note;
@@ -82,20 +102,24 @@ class NoteCommand extends Command {
     }
 }
 
-class SetLengthCommand extends Command {
-    constructor(length, note, songList) {
+class SetNoteCommand extends Command {
+    /**
+     * Command that alters the last note in the given song array.
+     * @extends Command
+     */
+    constructor(newNote, songList) {
         super();
-        this.length = length;
-        this.prevLength = note.length;
+        this.newNote = newNote;
+        this.prevNote = songList.notes[songList.notes.length - 1];
         this.songList = songList;
     }
     
     execute() {
-        songList.getBack().length = this.length;
+        this.songList.notes[this.songList.notes.length - 1] = this.newNote;
     }
     
     undo() {
-        songList.getBack().length = this.prevLength;
+            this.songList.notes[this.songList.notes.length - 1] = this.prevNote;
     }
     
     redo() {
@@ -104,6 +128,11 @@ class SetLengthCommand extends Command {
 }
 
 class ClearCommand extends Command {
+    /**
+     * Command that clears a song
+     * @extends Command
+     */
+     
     constructor(songList) {
         super();
         this.prevSongList = songList;

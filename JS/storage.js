@@ -1,6 +1,14 @@
+/** This files purpose is to provide functions to interact with the clients local storage.
+ *
+*/
+
+/// the users local storage object. Anything saved to this will remain when the user returns to the site. 
 var _localStorage = window.localStorage;
 
 
+/**
+ * Called by index.js, initializes song to users local storage.
+ */
 function checkUserStorage() {
     if (isAvailable()) {
         if (_localStorage.songNotes || _localStorage.songName) {
@@ -21,7 +29,8 @@ function isAvailable() {
     return typeof(Storage) !== "undefined";
 }
 
-/** saves the song the user is currently working on
+/** 
+*   saves the song the user is currently working on
 *   Since we want the user to be able to continue their working
 *   without worry of their internet going out, we use localStorage 
 *   instead of sessionStorage */
@@ -33,7 +42,10 @@ function saveSong(song) {
 }
 
 
-/** returns song from local storage */
+/** 
+ * returns song object from local storage
+ * see: song.js for class definition 
+*/
 function getSong() {
     if (isAvailable()) {
         name = JSON.parse(this._localStorage.songName);

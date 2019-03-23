@@ -18,12 +18,25 @@
             <h1> What is this? </h2>
             <p> This is a sine ton song editor. It's super easy!</p>
             <h2> Main Page </h2>
-            <p> This is where the main action happens. Here, your current song is dispayed to you in the bottom box.</p></li> 
-            <p> It's name is displayed next to the save button at the bottom. </p></li>
-            
+            <p class="help_page_paragraph"> 
+                This is where the main action happens. Here, your current song is dispayed to you in the bottom text box.
+                It's name is displayed next to the save button at the bottom.
+                I implemented auto save for this project using the clients local storage, but the client can still save to the server to have a collection of songs.
+            </p>
+            <h3> How to edit songs?</h3>
+            <p>
+                You will see a confirm note button under the slider and then a notes pitch and length ex "A4 0.2". Clicking this button will add that note to the song in the box below.
+                You can edit this note to be added as well! By sliding the slider bar, you will change the notes length and clicking one of the buttons near the top with pitch labels will 
+                change the notes pitch to that pitch. You can now add new notes to your leizure! If you have made a mistake, you can also undo/redo or clear the song box with the buttons 
+                just above where the song is displayed. You will also notice a set button next to the slider. What this button does is set the last note in the song box to the value in the confirm note 
+                button instead of adding a new note. At the bottom of the page there is a save button, and a text box for you to give the song a name.
+            </p>
             <h2> Files </h2>
-            <p> This is where you manage your song files saved on the server. You can have a maximum of 3 song files on the server at a time; however, you can download and upload song files. </p>
-            <p> All songs are stored in <a href="https://www.w3schools.com/js/js_json.asp"> JSON </a> format. Don't worry! JSON is human readable and easy to use </p>
+            <p> 
+                This is where you manage your song files saved on the server. You can have a maximum of 3 song files on the server at a time; however, you can download and upload song files. All songs are stored in <a href="https://www.w3schools.com/js/js_json.asp"> JSON </a> format. Don't worry! JSON is human readable and easy to use 
+                After you upload or save a song, you can load it into your editor by clicking the load to editor button. When you return to the main page, your song will be waiting there for you to edit it. 
+                Note: you can only save three songs on the server at a time, and if you save a song with another songs name, it will overwrite that song.
+            </p>
 		</nav>
 
 	<ul id="song_list"/>
