@@ -16,7 +16,8 @@ function load_button_callback(filePath) {
             var notes = data;
             
             window.localStorage.songNotes = notes;
-            window.localStorage.songName = JSON.stringify(name);            
+            window.localStorage.songName = JSON.stringify(name);
+            window.location.replace("index.php");            
             
         }, 'text');
     } 

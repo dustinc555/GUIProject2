@@ -14,7 +14,7 @@
 				<li class="menu_item"><a href="file_management.php">Files</a></li> 
 				<li class="menu_item"><a href="help.html">Help</a></li>
 			</ul>
-            
+        	</nav>    
             <h1> What is this? </h2>
             <p> This is a sine ton song editor. It's super easy!</p>
             <h2> Main Page </h2>
@@ -37,8 +37,12 @@
                 After you upload or save a song, you can load it into your editor by clicking the load to editor button. When you return to the main page, your song will be waiting there for you to edit it. 
                 Note: you can only save three songs on the server at a time, and if you save a song with another songs name, it will overwrite that song.
             </p>
-		</nav>
-
-	<ul id="song_list"/>
+	<h2> More implementation details </h2>
+	<ul>
+		<li>Files are stored by their name, so they must be unique.</li>
+		<li>The set button issues a change note command, but you can change the pitch or length alone by just altering the one property.</li>
+		<li>The undo/redo pattern in implemented with the command pattern. The class for it can be found in command.js, and it is used in index.js, its use location will be marked with the desired text ACTION.</li>
+		<li>The last grading teir passed is tier files.</li>
+	</ul>
 	</body>
 </html>
